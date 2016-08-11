@@ -27,7 +27,7 @@ var Knight = React.createClass({
     var isDragging = this.props.isDragging
 
     return connectDragSource(
-      <div style={{opacity: isDragging ? 0.5 : 1, fontSize: 25, fontWeight: 'bold', cursor: 'move'}}>
+      <div style={{opacity: isDragging ? 0.5 : 1, fontSize: 34, fontWeight: 'bold', cursor: 'move'}}>
         ♘
       </div>
     )
