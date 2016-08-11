@@ -1,7 +1,9 @@
-var React = require('react');
-var PropTypes = React.PropTypes;
-var Square = require('./Square');
-var Knight = require('./Knight');
+var React = require('react')
+var DragDropContext = require('react-dnd').DragDropContext
+var HTML5Backend = require('react-dnd-html5-backend')
+var PropTypes = React.PropTypes
+var Square = require('./Square')
+var Knight = require('./Knight')
 var moveKnight = require('./Game').moveKnight
 var canMoveKnight = require('./Game').canMoveKnight
 
@@ -13,15 +15,15 @@ var Board = React.createClass({
   },
 
   renderSquare: function (i) {
-    var x = i % 8;
-    var y = Math.floor(i / 8);
-    var black = (x + y) % 2 === 1;
+    var x = i % 8
+    var y = Math.floor(i / 8)
+    var black = (x + y) % 2 === 1
 
-    var knightX = this.props.knightPosition[0];
-    var knightY = this.props.knightPosition[1];
+    var knightX = this.props.knightPosition[0]
+    var knightY = this.props.knightPosition[1]
     var piece = (x === knightX && y === knightY) ?
       <Knight /> :
-      null;
+      null
 
     return (
       <div key={i}
@@ -31,7 +33,7 @@ var Board = React.createClass({
           {piece}
         </Square>
       </div>
-    );
+    )
   },
 
   handleSquareClick: function (toX, toY) {
@@ -41,9 +43,9 @@ var Board = React.createClass({
   },
 
   render: function () {
-    var squares = [];
+    var squares = []
     for (let i = 0; i < 64; i++) {
-      squares.push(this.renderSquare(i));
+      squares.push(this.renderSquare(i))
     }
 
     return (
@@ -55,8 +57,8 @@ var Board = React.createClass({
       }}>
         {squares}
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = Board;
+module.exports = DragDropContext(HTML5Backend)(Board)
