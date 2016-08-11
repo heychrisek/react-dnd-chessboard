@@ -2,6 +2,8 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var Square = require('./Square');
 var Knight = require('./Knight');
+var moveKnight = require('./Game').moveKnight
+var canMoveKnight = require('./Game').canMoveKnight
 
 var Board = React.createClass({
   propTypes: {
@@ -23,12 +25,19 @@ var Board = React.createClass({
 
     return (
       <div key={i}
-           style={{ width: '12.5%', height: '12.5%' }}>
+           style={{ width: '12.5%', height: '12.5%' }}
+           onClick={this.handleSquareClick.bind(this, x, y)}>
         <Square black={black}>
           {piece}
         </Square>
       </div>
     );
+  },
+
+  handleSquareClick: function (toX, toY) {
+    if (canMoveKnight(toX, toY)) {
+      moveKnight(toX, toY)
+    }
   },
 
   render: function () {
